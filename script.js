@@ -18,6 +18,11 @@ Book.prototype.display= function(){
     const readBtn = document.createElement("button")
     const delBtn = document.createElement("button");
 
+    delBtn.addEventListener("click",() =>{
+        myLibrary.splice(myLibrary.indexOf(this),1)
+        displayLibrary()
+    })
+
     readBtn.innerText = "Read"
     delBtn.innerText = "Delete"
     bookDiv.innerText = `Title: ${this.title},Author: ${this.author},Pages: ${this.pages},Read: ${this.read ? "yes" : "not yet"}`
@@ -29,12 +34,12 @@ Book.prototype.display= function(){
 }
 //functions
 function addBookToLibrary(title,author,pages,read){
-    bookContainer.innerHTML = ""
     const newBook = new Book(title,author,pages,read)
     myLibrary.push(newBook)
 }
 
 function displayLibrary() {
+    bookContainer.innerHTML = ""
     myLibrary.forEach(book=>{
         book.display()
     })
@@ -44,6 +49,7 @@ function checkValue(){
     if(!authorInput.value){authorInput.value="Unknown"}
     if(!pagesInput.value){pagesInput.value="Unknown"}
 }
+
 
 //const
 const myLibrary = [];
