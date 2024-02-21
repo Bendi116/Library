@@ -22,6 +22,10 @@ Book.prototype.display= function(){
         myLibrary.splice(myLibrary.indexOf(this),1)
         displayLibrary()
     })
+    readBtn.addEventListener("click",()=>{
+        this.read = this.read?false:true;
+        displayLibrary()
+    })
 
     readBtn.innerText = "Read"
     delBtn.innerText = "Delete"
