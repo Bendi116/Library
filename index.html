@@ -11,19 +11,32 @@
     <div class="conatiner">
         <h1>My Library</h1>
         <div class="main">
-            <dialog>
+            <button id="addNewBook">New Book</button>
+            <div class="bookContainer"></div>
+            <dialog id="dialog">
                 <form action="" method="post">
-                    <label for="title">Title Name:<input type="title" name="title" id="title" placeholder="Harry Potter"></label>
-                    <label for="author">Author Name:<input type="author" name="author"  id="author" placeholder="J. K. Rowling"></label>
-                    <label for="pages">Number Of Pages:<input type="tel" name="pages" id="pages"></label>
+                    <label for="title">Title Name:<input 
+                        type="title" 
+                        name="title" 
+                        id="title"
+                        placeholder="Harry Potter"></label>
+                    <label for="author">Author Name:<input 
+                        type="author" 
+                        name="author"  
+                        id="author" 
+                        placeholder="J. K. Rowling"></label>
+                    <label for="pages">Number Of Pages:<input 
+                        type="tel" 
+                        name="pages" 
+                        id="pages"
+                        ></label>
                     <label for="read">Read it?</label>
                     <select name="read" id="read">
-                        <option value="default">Choose...</option>
                         <option >Yes</option>
-                        <option >No</option>
+                        <option selected>No</option>
                     </select>
-                    <button id="closeBtn">Close</button>
-                    <button id="submitBtn" formmethod="dialog">Add new book</button>
+                    <button id="closeBtn" formmethod="dialog" value="cancel">Close</button>
+                    <button id="submitBtn" type="submit" >Add new book</button>
                 </form>
             </dialog>
         </div>
