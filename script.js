@@ -1,6 +1,4 @@
-const myLibrary = [];
-const mainDiv = document.querySelector(".main")
-
+//constructors
 function Book(title, author, pages, read){
     this.title = title;
     this.author = author;
@@ -14,7 +12,22 @@ function Book(title, author, pages, read){
         }
     }
 }
+//prototype funcs
+Book.prototype.display= function(){
+    const bookDiv = document.createElement("div");
+    const readBtn = document.createElement("button")
+    const delBtn = document.createElement("button");
 
+    readBtn.innerText = "Read"
+    delBtn.innerText = "Delete"
+    bookDiv.innerText = `Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}, Read: ${this.read ? "read" : "not read yet"}`
+
+    mainDiv.appendChild(bookDiv)
+    mainDiv.appendChild(readBtn)
+    mainDiv.appendChild(delBtn)
+
+}
+//functions
 function addBookToLibrary(title,author,pages,read){
     const newBook = new Book(title,author,pages,read)
     myLibrary.push(newBook)
@@ -22,22 +35,17 @@ function addBookToLibrary(title,author,pages,read){
 
 function displayLibrary() {
     myLibrary.forEach(book=>{
-        const bookDiv = document.createElement("div");
-        const readBtn = document.createElement("button")
-        const delBtn = document.createElement("button");
-
-        readBtn.innerText = "Read"
-        delBtn.innerText = "Delete"
-        bookDiv.innerText = `Title: ${book.title}, Author: ${book.author}, Pages: ${book.pages}, Read: ${book.read ? "read" : "not read yet"}`
-
-        mainDiv.appendChild(bookDiv)
-        mainDiv.appendChild(readBtn)
-        mainDiv.appendChild(delBtn)
+        book.display()
     })
     
 
 }
+//const
+const myLibrary = [];
+const mainDiv = document.querySelector(".main")
 
+
+//test
 addBookToLibrary("The Hobbit","J.R.R. Tolkien",295,false)
 addBookToLibrary("Parcy Jackson","Rick Riordan",312,true)
 addBookToLibrary("Star Wars: A New Hope","George Lucas",400,true)
