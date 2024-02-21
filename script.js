@@ -12,6 +12,7 @@ function Book(title, author, pages, read){
         }
     }
 }
+
 //prototype funcs
 Book.prototype.display= function(){
     const bookDiv = document.createElement("div");
@@ -53,19 +54,25 @@ function checkValue(){
     if(!authorInput.value){authorInput.value="Unknown"}
     if(!pagesInput.value){pagesInput.value="Unknown"}
 }
-
+function submitForm(event){
+    event.preventDefault()
+    checkValue()
+    addBookToLibrary(titleInput.value,authorInput.value, pagesInput.value, readInput.value)
+    displayLibrary()
+    dialog.close()
+}
 
 //const
 const myLibrary = [];
 
+//html divs
 const bookContainer = document.querySelector(".bookContainer")
 const dialog = document.querySelector("#dialog")
-
+//btns
 const addNewBookBtn = document.querySelector("#addNewBook")
-const closeDialog = document.querySelector("#closeBtn")
-const submitFrom = document.querySelector("#submitBtn")
-
-
+const closeDialogBtn = document.querySelector("#closeBtn")
+const submitFormBtn = document.querySelector("#submitBtn")
+//form inputs
 const titleInput = document.querySelector("#title")
 const authorInput = document.querySelector("#author")
 const pagesInput = document.querySelector("#pages")
@@ -73,14 +80,8 @@ const readInput = document.querySelector("#read")
 
 //eventListeners
 addNewBookBtn.addEventListener("click", ()=>{dialog.showModal()})
-closeDialog.addEventListener("click", ()=>{dialog.close()})
-submitFrom.addEventListener("click", (event)=>{
-    event.preventDefault()
-    checkValue()
-    addBookToLibrary(titleInput.value,authorInput.value, pagesInput.value, readInput.value)
-    displayLibrary()
-    dialog.close()
-    })
+closeDialogBtn.addEventListener("click", ()=>{dialog.close()})
+submitFormBtn.addEventListener("click", submitForm)
 
 //test
 addBookToLibrary("The Hobbit","J.R.R. Tolkien",295,false)
