@@ -20,15 +20,16 @@ Book.prototype.display= function(){
 
     readBtn.innerText = "Read"
     delBtn.innerText = "Delete"
-    bookDiv.innerText = `Title: ${this.title}, Author: ${this.author}, Pages: ${this.pages}, Read: ${this.read ? "read" : "not read yet"}`
+    bookDiv.innerText = `Title: ${this.title},Author: ${this.author},Pages: ${this.pages},Read: ${this.read ? "yes" : "not yet"}`
 
-    mainDiv.appendChild(bookDiv)
-    mainDiv.appendChild(readBtn)
-    mainDiv.appendChild(delBtn)
+    bookContainer.appendChild(bookDiv)
+    bookContainer.appendChild(readBtn)
+    bookContainer.appendChild(delBtn)
 
 }
 //functions
 function addBookToLibrary(title,author,pages,read){
+    bookContainer.innerHTML = ""
     const newBook = new Book(title,author,pages,read)
     myLibrary.push(newBook)
 }
@@ -37,13 +38,39 @@ function displayLibrary() {
     myLibrary.forEach(book=>{
         book.display()
     })
-    
-
 }
+function checkValue(){
+    if(!titleInput.value){titleInput.value="Unknown"}
+    if(!authorInput.value){authorInput.value="Unknown"}
+    if(!pagesInput.value){pagesInput.value="Unknown"}
+}
+
 //const
 const myLibrary = [];
-const mainDiv = document.querySelector(".main")
 
+const bookContainer = document.querySelector(".bookContainer")
+const dialog = document.querySelector("#dialog")
+
+const addNewBookBtn = document.querySelector("#addNewBook")
+const closeDialog = document.querySelector("#closeBtn")
+const submitFrom = document.querySelector("#submitBtn")
+
+
+const titleInput = document.querySelector("#title")
+const authorInput = document.querySelector("#author")
+const pagesInput = document.querySelector("#pages")
+const readInput = document.querySelector("#read")
+
+//eventListeners
+addNewBookBtn.addEventListener("click", ()=>{dialog.showModal()})
+closeDialog.addEventListener("click", ()=>{dialog.close()})
+submitFrom.addEventListener("click", (event)=>{
+    event.preventDefault()
+    checkValue()
+    addBookToLibrary(titleInput.value,authorInput.value, pagesInput.value, readInput.value)
+    displayLibrary()
+    dialog.close()
+    })
 
 //test
 addBookToLibrary("The Hobbit","J.R.R. Tolkien",295,false)
