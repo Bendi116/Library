@@ -1,20 +1,20 @@
-//constructors
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function(){
-        if(read){
+//class
+class Book{
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+    info() {
+        if(this.read){
             return `${this.title} by ${this.author}, ${this.pages} pages,had read.`
         }else{
             return `${this.title} by ${this.author}, ${this.pages} pages,not read yet.`
         }
     }
-}
 
-//prototype funcs
-Book.prototype.display= function(){
+    display(){
     const bookDiv = document.createElement("div");
     const readBtn = document.createElement("button")
     const delBtn = document.createElement("button");
@@ -35,8 +35,13 @@ Book.prototype.display= function(){
     bookContainer.appendChild(bookDiv)
     bookContainer.appendChild(readBtn)
     bookContainer.appendChild(delBtn)
+    }
+
 
 }
+
+
+
 //functions
 function addBookToLibrary(title,author,pages,read){
     const newBook = new Book(title,author,pages,read)
