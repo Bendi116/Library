@@ -54,12 +54,18 @@ function checkValue(){
     if(!authorInput.value){authorInput.value="Unknown"}
     if(!pagesInput.value){pagesInput.value="Unknown"}
 }
-function submitForm(event){
-    event.preventDefault()
-    checkValue()
+function submitForm(){
+    //checkValue()
     addBookToLibrary(titleInput.value,authorInput.value, pagesInput.value, readInput.value)
     displayLibrary()
     dialog.close()
+}
+
+function constrainValidity(event){
+
+    if(titleInput.checkValidity() && authorInput.checkValidity()&&pagesInput.checkValidity()) submitForm()
+    console.log(titleInput.validationMessage)
+    event.preventDefault()
 }
 
 //const
@@ -73,15 +79,51 @@ const addNewBookBtn = document.querySelector("#addNewBook")
 const closeDialogBtn = document.querySelector("#closeBtn")
 const submitFormBtn = document.querySelector("#submitBtn")
 //form inputs
+const form = document.getElementById("libForm")
 const titleInput = document.querySelector("#title")
 const authorInput = document.querySelector("#author")
 const pagesInput = document.querySelector("#pages")
 const readInput = document.querySelector("#read")
 
+//declare validation msg
+
+titleInput.setCustomValidity("Please the title be min 3 char long")
+authorInput.setCustomValidity("Please the author be min 3 char long ")
+
+titleInput.addEventListener("input",(event)=>{
+    if(titleInput.validity.tooShort){
+        titleInput.setCustomValidity("Please the title be min 3 char long")
+    }else{
+        titleInput.setCustomValidity("")
+    }
+})
+
+authorInput.addEventListener("input",(event)=>{
+    if(authorInput.validity.tooShort){
+        authorInput.setCustomValidity("Please the author be min 3 char long ")
+    }else{
+        authorInput.setCustomValidity("")
+    }
+})
+
+pagesInput.addEventListener("input",(event)=>{
+    if(pagesInput.validity.rangeUnderflow){
+        pagesInput.setCustomValidity("Please the pages be more than 10")
+        console.log(true)
+    }
+    else if(pagesInput.validity.rangeOverflow){
+        pagesInput.setCustomValidity("Please the pages be less than 1000")
+    }else{
+        pagesInput.setCustomValidity("")
+    }
+})
+
+
+
 //eventListeners
 addNewBookBtn.addEventListener("click", ()=>{dialog.showModal()})
 closeDialogBtn.addEventListener("click", ()=>{dialog.close()})
-submitFormBtn.addEventListener("click", submitForm)
+submitFormBtn.addEventListener("click", (event)=>constrainValidity(event))
 
 //test
 addBookToLibrary("The Hobbit","J.R.R. Tolkien",295,false)

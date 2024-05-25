@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="script.js">
+    <link rel="stylesheet" href="style.css">
     <title>Library</title>
 </head>
 <body>   
@@ -14,21 +14,30 @@
             <button id="addNewBook">New Book</button>
             <div class="bookContainer"></div>
             <dialog id="dialog">
-                <form action="" method="post">
-                    <label for="title">Title Name:<input 
-                        type="title" 
+                <form action="" method="post" id="libForm">
+                    <label for="title" class="required">Title Name:<input 
+                        required
+                        type="text" 
                         name="title" 
                         id="title"
-                        placeholder="Harry Potter"></label>
-                    <label for="author">Author Name:<input 
-                        type="author" 
+                        placeholder="Harry Potter" 
+                        minlength="3"
+                        ></label>
+                    <label for="author" class="required">Author Name:<input 
+                        type="text" 
                         name="author"  
                         id="author" 
-                        placeholder="J. K. Rowling"></label>
-                    <label for="pages">Number Of Pages:<input 
-                        type="tel" 
+                        placeholder="J. K. Rowling" 
+                        minlength="3"
+                        required></label>
+                    <label for="pages" class="required">Number Of Pages:<input 
+                        type="number" 
                         name="pages" 
                         id="pages"
+                        placeholder="100"
+                        min="10"
+                        max="1000"
+                        required
                         ></label>
                     <label for="read">Read it?</label>
                     <select name="read" id="read">

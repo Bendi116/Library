@@ -1,0 +1,20 @@
+input:focus-visible{
+    outline: 0;
+}
+
+label.required::before{
+    content: "*";
+    color: red;
+}
+
+input:invalid{
+    
+    background: linear-gradient(90deg,red ,white);
+}
+
+input:invalid:focus{
+    background:none;
+    border: 5px double red;
+}
+
+
